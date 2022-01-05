@@ -30,10 +30,12 @@ class TriviaTestCase(unittest.TestCase):
         """Executed after reach test"""
         pass
 
-    """
-    Write at least one test for each test for successful operation and for expected errors.
-    """
+    '''
+    Adding 2 tests both for success and failure for different endpoints
+    '''
 
+#Test for GET request on questions route
+#For success
     def test_get_paginated_questions(self):
         res = self.client().get('/questions')
         data = json.loads(res.data)
@@ -44,6 +46,7 @@ class TriviaTestCase(unittest.TestCase):
         self.assertTrue(len(data['questions']))
         self.assertTrue(len(data['categories']))
 
+#For Failure
     def test_404_sent_requesting_questions_beyond_valid_page(self):
         res = self.client().get('/questions?page=1000')
         data = json.loads(res.data)
